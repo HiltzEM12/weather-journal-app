@@ -8,7 +8,7 @@ const express = require('express');
 const app = express();
 
 /* Middleware*/
-//Here we are configuring express to use body-parser as middle-ware.
+// Here we are configuring express to use body-parser as middle-ware.
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({
     extended: false
@@ -25,10 +25,10 @@ app.use(express.static('website'));
 
 // Setup Server
 
-//Define what port to use
+// Define what port to use
 const port = 8000;
 
-//Callback function for the server listener
+// Callback function for the server listener
 function listening() {
     console.log('Weather Jounal App Server running');
     console.log(`Running on localhost: ${port}`);
@@ -37,27 +37,17 @@ function listening() {
 // Initiate a server.  Takes the port and a callback function
 const server = app.listen(port, listening);
 
-// For stroring the data
-const weatherData = []; 
-
 // GET route
 app.get('/weather', function (request, response) {
-    response.send(weatherData);
-    console.log(weatherData);
+    response.send(projectData);
 });
 
 // POST route
 app.post('/weather', function (request, response) {
 
-    // Get the data
-    newWeather = {
-        temperature: request.body.temperature,
-        date: request.body.date,
-        userResponse: request.body.userResponse
-    }
+    projectData.temperature = request.body.temperature;
+    projectData.date = request.body.date;
+    projectData.userResponse = request.body.userResponse;
 
-    // Put the data into the array
-    weatherData.push(newWeather);
-    response.send(weatherData);
-    console.log(weatherData);
+    response.send(projectData);
 });
